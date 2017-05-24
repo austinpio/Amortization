@@ -1,0 +1,7 @@
+input[type="text"]:valid {
+  border: 2px solid green;
+}
+
+input[type="text"]:invalid {
+  border: 2px solid red;
+}
