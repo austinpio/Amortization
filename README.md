@@ -1,3 +1,3 @@
 # Amortization
 
-![Amortization graph] (https://raw.githubusercontent.com/austinpio/Amortization/master/src/assets/AmortizationScreenshot.png)
+![Alt text](/src/assets/AmortizationScreenshot.png "Optional Title")
