@@ -1,35 +1,40 @@
 <div class="container">
   <div class="card">
     <div class="card-header">
-      Loan Details
+      <i class="fa fa-home" aria-hidden="true"></i> Loan Details
     </div>
     <div class="card-block">
-      <form [formGroup]="loanForm">
-        <md-input-container>
-          <input mdInput placeholder="Mortgage Value" type="number" [formControl]="principal" name="principal"
-                 id="principal">
-          <div [hidden]="principal.valid || principal.untouched">
-            <div [hidden]="!principal.hasError('required')">
-              Principal is mandatory
+      <div class="row">
+      <form [formGroup]="loanForm" class="form-check-inline">
+        <div class="col-md-6">
+          <md-input-container>
+            <input mdInput placeholder="Mortgage Value" type="number" [formControl]="principal" name="principal"
+                   id="principal">
+            <div [hidden]="principal.valid || principal.untouched">
+              <div [hidden]="!principal.hasError('required')">
+                Principal is mandatory
+              </div>
+              <div [hidden]="!principal.hasError('minValue')">
+                You can't buy a house with anything less than 10000 <i class="fa fa-smile-o" aria-hidden="true"></i>
+              </div>
             </div>
-            <div [hidden]="!principal.hasError('minValue')">
-              You can't buy a house with anything less than 10000 <i class="fa fa-smile-o" aria-hidden="true"></i>
-            </div>
-          </div>
-        </md-input-container>
+          </md-input-container>
+        </div>
 
-        <br>
+        <div class="col-md-6">
+          <label for="interestRate">Interest Rate</label>
+          <md-slider [min]="1" [max]="100" [step]="0.01" [value]="5.5" [thumbLabel]="true" [formControl]="interestRate"
+                     id="interestRate"></md-slider>
+        </div>
 
-        <label for="interestRate">Interest Rate</label>
-        <md-slider [min]="1" [max]="100" [step]="0.01" [value]="5.5" [thumbLabel]="true" [formControl]="interestRate"
-                   id="interestRate"></md-slider>
-        <br>
-
-        <label for="years">Years</label>
-        <md-slider class="form-element-full-width" [min]="1" [max]="40" [value]="30" [thumbLabel]="true" id="years"
-                   [formControl]="years"></md-slider>
+        <div class="col-md-6">
+          <label for="years">Years</label>
+          <md-slider class="form-element-full-width" [min]="1" [max]="40" [value]="30" [thumbLabel]="true" id="years"
+                     [formControl]="years"></md-slider>
+        </div>
 
       </form>
+      </div>
     </div>
   </div>
 </div>
