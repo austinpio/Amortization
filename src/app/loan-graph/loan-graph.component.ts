@@ -47,7 +47,9 @@ export class LoanGraphComponent implements OnInit {
               beginAtZero:true
             }
           }]
-        }
+        },
+        maintainAspectRatio: false,
+        responsive: true
       }
     });
   }
