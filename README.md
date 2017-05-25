@@ -1,3 +1,3 @@
 # Amortization
 
-![Amortization graph] (Amortization/src/assets/AmortizationScreenshot.png)
+![Amortization graph] (https://raw.githubusercontent.com/austinpio/Amortization/master/src/assets/AmortizationScreenshot.png)
