@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {LoanDetails} from '../shared/loan-details';
 import {LoandetailserviceService} from '../services/loandetailservice.service';
 import {FormBuilder, FormGroup, FormControl, Validators, ValidatorFn, AbstractControl} from '@angular/forms';
@@ -53,7 +53,7 @@ export class LoanDetailsComponent implements OnInit {
 
   formChange(loanDetails: LoanDetails): void {
     loanDetails = this.loanDetails;
-    this.loanService.calculateMortgage(loanDetails);
+    this.loanService.setMortgageDetails(loanDetails);
   }
 
   ngOnInit() {

@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {amortizationSchedule} from '../../../node_modules/amortization';
 import {Chart} from 'chart.js';
+import {LoanDetails} from '../shared/loan-details';
+import {LoandetailserviceService} from '../services/loandetailservice.service';
 
 @Component({
   selector: 'app-loan-graph',
@@ -9,16 +11,66 @@ import {Chart} from 'chart.js';
 })
 export class LoanGraphComponent implements OnInit {
 
-  constructor() {
+  private myChart: Chart;
+
+  constructor(private loanDetailService: LoandetailserviceService) {
+  }
+
+  refreshGraph(loanDetails: LoanDetails) {
+    try {
+      const monthlyAmortization = JSON.parse(JSON.stringify(amortizationSchedule(loanDetails.loanCapital, loanDetails.years, loanDetails.interestRate)));
+
+      console.log(monthlyAmortization);
+      const interest: number[] = new Array();
+      const principal: number[] = new Array();
+
+      const payment: number[] =new Array();
+
+      monthlyAmortization.forEach((obj) => {
+        interest.push(obj.interestPaymentRounded);
+        principal.push(obj.principalPaymentRounded);
+        payment.push(obj.paymentNumber);
+      });
+      this.myChart.data.labels = payment;
+      this.myChart.data.datasets = [{
+        label: 'Principal',
+        data: principal,
+        backgroundColor: 'rgba(55, 160, 225, 0.7)',
+        hoverBackgroundColor: 'rgba(55, 160, 225, 0.7)',
+        hoverBorderWidth: 2,
+      },
+        {
+          label: 'Interest',
+          data: interest,
+          backgroundColor: 'rgba(225, 58, 55, 0.7)',
+          hoverBackgroundColor: 'rgba(225, 58, 55, 0.7)',
+          hoverBorderWidth: 2,
+        }
+      ];
+
+      this.myChart.update();
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  initialiseLoanDetails() {
+    this.loanDetailService.getMortgageDetails().subscribe(loanDetail => {
+      this.refreshGraph(loanDetail);
+      // console.log(loanDetail);
+    });
   }
 
   ngOnInit() {
+
+    this.initialiseLoanDetails();
+
     const ctx = document.getElementById('myChart');
-    const myChart = new Chart(ctx, {
+    this.myChart = new Chart(ctx, {
       type: 'bar',
-        data: {
+      data: {
         labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-          datasets: [{
+        datasets: [{
           label: '# of Votes',
           data: [12, 19, 3, 5, 2, 3],
           backgroundColor: [
@@ -42,9 +94,13 @@ export class LoanGraphComponent implements OnInit {
       },
       options: {
         scales: {
+          xAxes: [{
+            stacked: true
+          }],
           yAxes: [{
+            stacked: true,
             ticks: {
-              beginAtZero:true
+              beginAtZero: true
             }
           }]
         },
