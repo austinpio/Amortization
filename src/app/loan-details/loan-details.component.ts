@@ -15,12 +15,12 @@ export class LoanDetailsComponent implements OnInit {
   private loanDetails: LoanDetails;
   private loanService: LoandetailserviceService;
 
-  principal = new FormControl('', [
+  principal = new FormControl(100000, [
     Validators.required,
     minValue(10000)
   ]);
-  interestRate = new FormControl('');
-  years = new FormControl('');
+  interestRate = new FormControl(50.5);
+  years = new FormControl(10);
 
   loanForm: FormGroup;
 

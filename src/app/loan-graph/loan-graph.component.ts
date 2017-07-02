@@ -17,6 +17,8 @@ export class LoanGraphComponent implements OnInit {
   }
 
   refreshGraph(loanDetails: LoanDetails) {
+    console.log('refreshing graph');
+    console.log(loanDetails);
     try {
       const monthlyAmortization = JSON.parse(JSON.stringify(amortizationSchedule(loanDetails.loanCapital, loanDetails.years, loanDetails.interestRate)));
 
