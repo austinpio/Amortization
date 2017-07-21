@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/austinpio/Amortization.svg?branch=master)]
+![Build Status](https://travis-ci.org/austinpio/Amortization.svg?branch=master)
 
 # Amortization :rocket:
 
